@@ -1,0 +1,262 @@
+/* ==============================
+   1. VARIABLES & RESET
+   ============================== */
+:root {
+  /* Dark Theme (Default) */
+  --bg: #0f0f0f;
+  --sidebar-bg: #161616;
+  --card: #1f1f1f;
+  --text: #ffffff;
+  --text-muted: #aaaaaa;
+  --accent: #ff4b4b; /* Red accent for "Memes" vibe */
+  --border: #333333;
+  --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.light {
+  --bg: #f4f4f4;
+  --sidebar-bg: #ffffff;
+  --card: #ffffff;
+  --text: #111111;
+  --text-muted: #555555;
+  --accent: #e02e2e;
+  --border: #dddddd;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-main);
+  transition: background 0.3s, color 0.3s;
+  height: 100vh;
+  overflow: hidden; /* App-like feel */
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ==============================
+   2. LAYOUT (APP STRUCTURE)
+   ============================== */
+.app {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar .logo {
+  padding: 0 20px 20px;
+  font-size: 24px;
+  color: var(--accent);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+
+.sidebar h4 {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 20px 20px 10px;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 15px 20px;
+}
+
+/* Sidebar Navigation Links */
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.sidebar nav a:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
+.sidebar nav a.active {
+  color: var(--accent);
+  border-left: 3px solid var(--accent);
+  background: linear-gradient(90deg, rgba(255, 75, 75, 0.1), transparent);
+}
+
+.sidebar nav a .icon { width: 20px; text-align: center; }
+
+/* Main Content Area */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ==============================
+   3. TOP BAR
+   ============================== */
+.topbar {
+  height: 60px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  background: var(--bg);
+}
+
+.topbar input[type="search"] {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 8px 15px;
+  border-radius: 20px;
+  color: var(--text);
+  width: 300px;
+  outline: none;
+}
+
+.top-actions {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+#themeToggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.signin {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ==============================
+   4. SECTIONS & TABS
+   ============================== */
+section.content {
+  display: none; /* Hidden by default */
+  padding: 30px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+section.content.active {
+  display: block; /* Show active tab */
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h2 { margin-bottom: 20px; }
+
+/* Grid Layout for Memes */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  height: 200px; /* Placeholder height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+}
+
+/* ==============================
+   5. LEGAL PAGES (About, Contact, etc.)
+   ============================== */
+.legal-container {
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.legal-container h1 { font-size: 2.5rem; margin-bottom: 10px; color: var(--accent); }
+.legal-container h2 { margin-top: 30px; font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+.legal-container p { line-height: 1.6; margin-bottom: 15px; color: var(--text-muted); }
+.legal-container ul { list-style: disc; margin-left: 20px; margin-bottom: 20px; color: var(--text-muted); }
+.legal-container li { margin-bottom: 8px; }
+.legal-container a { color: var(--accent); text-decoration: underline; }
+
+/* ==============================
+   6. FOOTER
+   ============================== */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  background: var(--bg);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.footer-links a {
+  margin: 0 10px;
+  font-size: 0.85rem;
+}
+
+.footer-links a:hover { color: var(--accent); }
+
+/* Scrollbar Styling */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
